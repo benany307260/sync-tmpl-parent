@@ -1,6 +1,8 @@
 package com.montnets.sync.tmpl.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +34,8 @@ public class PushTmplTask {
 		}
 		for(Long tmplId : tmplIdList) {
 			log.info("上报模板，tmplId="+tmplId);
-			String result = pushTmplService.pushTmpl(tmplId);
+			Map<String,String> param = new HashMap<String,String>();
+			String result = pushTmplService.pushTmpl(tmplId, param);
 			// 结果存库
 			log.info(result);
 		}

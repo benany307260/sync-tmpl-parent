@@ -1,5 +1,7 @@
 package com.montnets.sync.tmpl.service.impl;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -12,7 +14,7 @@ public class PushTmplImpl implements IPushTmplService {
 	private static Logger log = LoggerFactory.getLogger(PushTmplImpl.class);
 	
 	@Override
-	public String pushTmpl(Long tmplId) {
+	public String pushTmpl(Long tmplId, Map<String,String> paramMap) {
 		log.info("模板上报");
 		// 下载模板
 		// 解析模板

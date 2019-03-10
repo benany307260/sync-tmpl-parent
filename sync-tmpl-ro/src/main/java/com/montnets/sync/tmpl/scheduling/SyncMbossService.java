@@ -2,24 +2,22 @@ package com.montnets.sync.tmpl.scheduling;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.Trigger;
 import org.springframework.scheduling.TriggerContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.support.CronTrigger;
-import org.springframework.stereotype.Service;
 
 import com.montnets.sync.tmpl.config.SyncTmplConfig;
-import com.montnets.sync.tmpl.service.PushTmplTask;
+import com.montnets.sync.tmpl.service.SyncMbossTask;
  
 /**
  * 同步模板通道绑定到mboss定时服务
  *
  */
-@Lazy(false)
-@Service
+@Configuration
 @EnableScheduling
 public class SyncMbossService implements SchedulingConfigurer {
  
@@ -29,7 +27,7 @@ public class SyncMbossService implements SchedulingConfigurer {
     private SyncTmplConfig syncTmplConfig;
     
     @Autowired
-    private PushTmplTask pushTmplTask;
+    private SyncMbossTask syncMbossTask;
  
  
     
@@ -39,7 +37,7 @@ public class SyncMbossService implements SchedulingConfigurer {
             @Override
             public void run() {
                 // 任务逻辑
-            	//pushTmplTask.run();
+            	syncMbossTask.run();
             }
         }, new Trigger() {
             @Override
