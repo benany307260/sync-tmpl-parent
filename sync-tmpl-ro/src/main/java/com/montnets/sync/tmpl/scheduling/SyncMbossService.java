@@ -1,8 +1,6 @@
 package com.montnets.sync.tmpl.scheduling;
 import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.Trigger;
@@ -16,13 +14,16 @@ import org.springframework.stereotype.Service;
 import com.montnets.sync.tmpl.config.SyncTmplConfig;
 import com.montnets.sync.tmpl.service.PushTmplTask;
  
- 
+/**
+ * 同步模板通道绑定到mboss定时服务
+ *
+ */
 @Lazy(false)
 @Service
 @EnableScheduling
-public class TimedTaskService implements SchedulingConfigurer {
+public class SyncMbossService implements SchedulingConfigurer {
  
-    private static Logger log = LoggerFactory.getLogger(TimedTaskService.class);
+    //private static Logger log = LoggerFactory.getLogger(SyncMbossService.class);
     
     @Autowired
     private SyncTmplConfig syncTmplConfig;
@@ -38,12 +39,12 @@ public class TimedTaskService implements SchedulingConfigurer {
             @Override
             public void run() {
                 // 任务逻辑
-            	pushTmplTask.run();
+            	//pushTmplTask.run();
             }
         }, new Trigger() {
             @Override
             public Date nextExecutionTime(TriggerContext triggerContext) {
-                String s = syncTmplConfig.getPushTpmlCron();
+                String s = syncTmplConfig.getSyncMbossCron();
                 // 任务触发，可修改任务的执行周期
                 CronTrigger trigger = new CronTrigger(s);
                 Date nextExec = trigger.nextExecutionTime(triggerContext);

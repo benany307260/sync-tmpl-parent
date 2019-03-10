@@ -8,9 +8,14 @@ import org.springframework.stereotype.Component;
 public class SyncTmplConfig {
 	
 	/**
-	 * 上报模板Cron表达式，默认每20s一次
+	 * 上报模板的Cron表达式，默认每5s一次
 	 */
-	private String pushTpmlCron = "0/20 * * * * ?";
+	private String pushTpmlCron = "0/5 * * * * ?";
+	
+	/**
+	 * 同步mboss的Cron表达式，默认每5s一次
+	 */
+	private String syncMbossCron = "0/5 * * * * ?";
 
 	public String getPushTpmlCron() {
 		return pushTpmlCron;
@@ -20,5 +25,12 @@ public class SyncTmplConfig {
 		this.pushTpmlCron = pushTpmlCron;
 	}
 
+	public String getSyncMbossCron() {
+		return syncMbossCron;
+	}
+
+	public void setSyncMbossCron(String syncMbossCron) {
+		this.syncMbossCron = syncMbossCron;
+	}
 	
 }

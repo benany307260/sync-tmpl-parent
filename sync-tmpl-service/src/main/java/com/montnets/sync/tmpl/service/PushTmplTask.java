@@ -17,15 +17,35 @@ public class PushTmplTask {
 	//private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 	
 	@Autowired
-	TmplMapper tmplMapper;
+	private TmplMapper tmplMapper;
+	
+	private IPushTmplService pushTmplService;
+	
+	/*public PushTmplTask(IPushTmplService pushTmplService) {
+		this.pushTmplService = pushTmplService;
+	}*/
 	
 	public void run() {
 		List<Long> tmplIdList = tmplMapper.getByCondition();
-		if(tmplIdList != null && tmplIdList.size() > 0) {
-			log.info("第一条记录："+tmplIdList.get(0).toString());
-		}else {
-			log.info("没记录");
+		if(tmplIdList == null || tmplIdList.size() < 1) {
+			return;
 		}
-		log.info("执行完");
+		for(Long tmplId : tmplIdList) {
+			log.info("上报模板，tmplId="+tmplId);
+			String result = pushTmplService.pushTmpl(tmplId);
+			// 结果存库
+			log.info(result);
+		}
 	}
+
+	public IPushTmplService getPushTmplService() {
+		return pushTmplService;
+	}
+
+	public void setPushTmplService(IPushTmplService pushTmplService) {
+		this.pushTmplService = pushTmplService;
+	}
+	
+	
+	
 }
