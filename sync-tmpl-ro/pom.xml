@@ -23,6 +23,11 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.6</version>
+		</dependency>
+		<dependency>
 			<groupId>com.montnets</groupId>
 			<artifactId>sync-tmpl-service</artifactId>
 			<version>1.0.0.1</version>
