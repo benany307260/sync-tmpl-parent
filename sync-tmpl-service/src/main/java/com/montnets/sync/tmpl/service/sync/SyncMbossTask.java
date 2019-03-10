@@ -1,4 +1,4 @@
-package com.montnets.sync.tmpl.service;
+package com.montnets.sync.tmpl.service.sync;
 
 import java.util.List;
 

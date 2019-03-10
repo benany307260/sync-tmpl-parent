@@ -1,4 +1,4 @@
-package com.montnets.sync.tmpl.scheduling;
+package com.montnets.sync.tmpl.service.sync;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,26 +10,24 @@ import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.support.CronTrigger;
 
-import com.montnets.sync.tmpl.config.SyncTmplConfig;
-import com.montnets.sync.tmpl.service.SyncMbossTask;
+import com.montnets.sync.tmpl.service.config.SystemConfig;
  
 /**
- * 同步模板通道绑定到mboss定时服务
+ * 数据自动同步服务
  *
  */
 @Configuration
 @EnableScheduling
-public class SyncMbossService implements SchedulingConfigurer {
+public class DataSyncService implements SchedulingConfigurer {
  
-    //private static Logger log = LoggerFactory.getLogger(SyncMbossService.class);
+    //private static Logger log = LoggerFactory.getLogger(PushTmplService.class);
     
     @Autowired
-    private SyncTmplConfig syncTmplConfig;
+    private SystemConfig systemConfig;
     
     @Autowired
-    private SyncMbossTask syncMbossTask;
- 
- 
+    private DataSyncTask dataSyncTask;
+    
     
     @Override
     public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
@@ -37,12 +35,12 @@ public class SyncMbossService implements SchedulingConfigurer {
             @Override
             public void run() {
                 // 任务逻辑
-            	syncMbossTask.run();
+            	dataSyncTask.run();
             }
         }, new Trigger() {
             @Override
             public Date nextExecutionTime(TriggerContext triggerContext) {
-                String s = syncTmplConfig.getSyncMbossCron();
+                String s = systemConfig.getDataSyncCron();
                 // 任务触发，可修改任务的执行周期
                 CronTrigger trigger = new CronTrigger(s);
                 Date nextExec = trigger.nextExecutionTime(triggerContext);

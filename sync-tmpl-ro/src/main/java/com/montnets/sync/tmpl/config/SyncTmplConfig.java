@@ -13,9 +13,19 @@ public class SyncTmplConfig {
 	private String pushTpmlCron = "0/5 * * * * ?";
 	
 	/**
-	 * 同步mboss的Cron表达式，默认每5s一次
+	 * 运营商接口url
 	 */
-	private String syncMbossCron = "0/5 * * * * ?";
+	private String url;
+	
+	/**
+	 * 运营商接口鉴权用户名
+	 */
+	private String userName;
+	
+	/**
+	 * 运营商接口鉴权密码
+	 */
+	private String userPwd;
 
 	public String getPushTpmlCron() {
 		return pushTpmlCron;
@@ -25,12 +35,28 @@ public class SyncTmplConfig {
 		this.pushTpmlCron = pushTpmlCron;
 	}
 
-	public String getSyncMbossCron() {
-		return syncMbossCron;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setSyncMbossCron(String syncMbossCron) {
-		this.syncMbossCron = syncMbossCron;
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserPwd() {
+		return userPwd;
+	}
+
+	public void setUserPwd(String userPwd) {
+		this.userPwd = userPwd;
 	}
 	
 }
